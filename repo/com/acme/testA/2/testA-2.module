@@ -1,0 +1,25 @@
+{
+  "formatVersion": "0.4",
+  "component": {
+    "group": "com.acme",
+    "module": "testA",
+    "version": "2",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "variants": [
+    {
+      "name": "api",
+      "dependencies": [
+      ],
+      "attributes": { "org.gradle.usage": "java-api" }
+    },
+    {
+      "attributes": { "org.gradle.usage": "java-runtime" },
+      "dependencies": [
+      ],
+      "name": "runtime"
+    }
+  ]
+}
