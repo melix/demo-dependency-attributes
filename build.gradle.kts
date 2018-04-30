@@ -15,23 +15,23 @@ val forceB by cliOption()
 val quality by cliOption()
 
 configurations.compileClasspath.attributes {
-    if (all != null) {
-        attribute(statusAttribute, all!!)
+    all?.let {
+        attribute(statusAttribute, it)
     }
-    if (quality != null) {
-        attribute(qualityAttribute, quality!!)
+    quality?.let {
+        attribute(qualityAttribute, it)
     }
 }
 
 dependencies {
     implementation("com.acme:testA:[1,)") {
-        if (forceA != null) {
-            attributes.attribute(statusAttribute, forceA!!)
+        forceA?.let {
+            attributes.attribute(statusAttribute, it)
         }
     }
     implementation("com.acme:testB:[1,)") {
-        if (forceB != null) {
-            attributes.attribute(statusAttribute, forceB!!)
+        forceB?.let {
+            attributes.attribute(statusAttribute, it)
         }
     }
 }
@@ -41,10 +41,10 @@ dependencies {
 tasks.create("resolveDependencies") {
     doLast {
         println("Asking for modules with status=${all ?: "any"} and quality=${quality ?: "any"}}")
-        if (forceA != null) {
+        forceA?.let {
             println("And forcing testA to have status ${forceA}")
         }
-        if (forceB != null) {
+        forceB?.let {
             println("And forcing testB to have status ${forceB}")
         }
         val resolutionResult = configurations.compileClasspath.incoming.resolutionResult
