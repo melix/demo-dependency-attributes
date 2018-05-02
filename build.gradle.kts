@@ -16,10 +16,10 @@ configure<com.gradle.scan.plugin.BuildScanExtension> {
 val statusAttribute = attribute<String>("org.gradle.status")
 val qualityAttribute = attribute<String>("quality")
 
-val all by cliOption()
-val forceA by cliOption()
-val forceB by cliOption()
-val quality by cliOption()
+val all by cliOption()      // use -Pall=<some status> to resolve dependencies with status=<some status>
+val forceA by cliOption()   // use -PforceA=<some status> to force the resolution of A to some status
+val forceB by cliOption()   // use -PforceB=<some status> to force the resolution of B to some status
+val quality by cliOption()  // use -Pquality=<some quality> to resolve dependencies with quality=<some quality>
 
 configurations.compileClasspath.attributes {
     all?.let {
