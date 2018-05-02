@@ -46,6 +46,7 @@ dependencies {
 // Below is just helpers for the sake of the demo
 
 tasks.create("resolveDependencies") {
+    group = "Dependency resolution features"
     doLast {
         println("Asking for modules with status=${all ?: "any"} and quality=${quality ?: "any"}}")
         forceA?.let {
