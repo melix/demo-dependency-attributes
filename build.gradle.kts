@@ -3,7 +3,14 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 plugins {
+    `build-scan`
     `java-library`
+}
+
+configure<com.gradle.scan.plugin.BuildScanExtension> {
+    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
+    setTermsOfServiceAgree("yes")
+    publishAlways()
 }
 
 val statusAttribute = attribute<String>("org.gradle.status")
