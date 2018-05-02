@@ -55,23 +55,22 @@ tasks.create("resolveDependencies") {
         forceB?.let {
             println("And forcing testB to have status ${forceB}")
         }
-        val resolutionResult = configurations.compileClasspath.incoming.resolutionResult
-        resolutionResult.allComponents {
-            if (id is ModuleComponentIdentifier) {
-                println("Resolved variant $this with attributes ${variant.attributes}")
+        configurations.compileClasspath.incoming.resolutionResult.run {
+            allComponents {
+                if (id is ModuleComponentIdentifier) {
+                    println("Resolved variant $this with attributes ${variant.attributes}")
+                }
             }
-        }
-        resolutionResult.allDependencies {
-            if (this is UnresolvedDependencyResult) {
-                println("Unresolved dependency : $this")
+            allDependencies {
+                if (this is UnresolvedDependencyResult) {
+                    println("Unresolved dependency : $this")
+                }
             }
         }
     }
 }
 
 inline fun <reified T> attribute(name: String): Attribute<T> = Attribute.of(name, T::class.java)
-
-fun Project.option(name: String) = findProperty(name) as String?
 
 fun cliOption(): ReadOnlyProperty<Project, String?> = object : ReadOnlyProperty<Project, String?> {
     override
