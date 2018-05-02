@@ -33,12 +33,16 @@ configurations.compileClasspath.attributes {
 dependencies {
     implementation("com.acme:testA:[1,)") {
         forceA?.let {
-            attributes.attribute(statusAttribute, it)
+            attributes {
+                attribute(statusAttribute, it)
+            }
         }
     }
     implementation("com.acme:testB:[1,)") {
         forceB?.let {
-            attributes.attribute(statusAttribute, it)
+            attributes {
+                attribute(statusAttribute, it)
+            }
         }
     }
 }
